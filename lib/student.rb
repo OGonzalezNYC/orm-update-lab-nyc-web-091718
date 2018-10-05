@@ -6,7 +6,7 @@ class Student
   #  with DB[:conn]
   attr_accessor :id, :name, :grade
 
-  def initialize(id=nil, name, grade)
+  def initialize(id=nil, name, grade) #This method initializes a new instance without saving it to the db.
     @id = id
     @name = name
     @grade = grade
@@ -22,7 +22,7 @@ class Student
     DB[:conn].execute(sql)
   end
 
-  def save
+  def save #This method saves an instance to the db.
     if self.id
       self.update
     else
@@ -32,7 +32,7 @@ class Student
     end
   end
 
-  def self.create(name, grade)
+  def self.create(name, grade) #This method initializes an instance AND saves it to the table, in case we wish to do both at once.
     new_student = self.new(name, grade)
     new_student.save
     new_student
